@@ -1,8 +1,7 @@
 # POA_Project
 Optimization pipeline of predicted putative antigens in web prediction tools. 
 
-# **<center>POA : Pipeline de Otimização de Antígenos</center> 
-# **<center>(Antigen Optimization Pipeline)</center> 
+# **POA : Pipeline de Otimização de Antígenos (Antigen Optimization Pipeline) 
 
 # Introdução
 O Pipeline de Otimização de Antígenos (POA) é um pipeline semiautomático em python para analise, organização, recuperação e triagem de epítopos resultados da predição de peptídeos antigênicos em ferramentas web. 

@@ -12,8 +12,11 @@ def MHCIIHTMLconverter(file):
             elif line[0:1] == 'H':
                 mhcii_df_line = line.split('\t')
                 if len(mhcii_df_line) != len(col):
-                    raise Exception(f'ValueError: cannot set a row with mismatched columns in {file}')
+                    print(f'ValueError: cannot set a row with mismatched columns in {file}')
                     print(f"Line: {mhcii_df_line}")
+                    new_cells = len(col) - len(mhcii_df_line)
+                    for cell in range(new_cells):
+                        mhcii_df_line.append('[NaN]')
                 MHCII_df.loc[x] = mhcii_df_line
                 x += 1
     return(MHCII_df)
