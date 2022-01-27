@@ -1,6 +1,5 @@
 # POA : Pipeline de Otimização de Antígenos (Antigen Optimization Pipeline)
 
-
 ## 1. INTRODUÇÃO
 O Pipeline de Otimização de Antígenos (POA) é um pipeline semiautomático em python para análise, organização, recuperação e triagem de epítopos resultantes da predição de peptídeos antigênicos em ferramentas web. 
 A partir dos resultados obtidos em ferramentas de predição para células B, células T-citotóxicas e células T-auxiliares, o POA identifica os melhores alvos e cria um banco de dados com estes antígenos. Além disso, o POA faz a identificação dos peptídeos com alta similaridade de resíduos entre espécies em um determinado grupo de organismos, com o auxílio da ferramenta Epitope Conservancy Analysis (http://tools.iedb.org/conservancy/), e a caracterização da localização dos epítopos em porções transmembranares, com o auxílio da ferramenta pyTMHMM (https://github.com/bosborne/pyTMHMM).
@@ -44,21 +43,38 @@ Como pipeline semi-automático, a primeira coisa a se fazer é realizar a predi�
 
 ###### 3.1.1.1 Bepipred
 O arquivo fasta contendo todas as proteínas para a análise deve ser submetido à ferramenta Bepipred. O resultado esperado é algo como isto:
+
+![Captura de tela de 2022-01-26 17-45-11](https://user-images.githubusercontent.com/72517648/151360191-20879962-26e7-4df5-a79e-1f9d79082c8d.png)
+
+
 O resultado da análise do Bepipred 2.0 é uma página web (html) contendo as proteínas e as regiões preditamente antigênicas (marcadas em E) em cada sequência. Na página de resultados tem a opção de fazer o Download deste resultado em arquivo .json (JSON Summary). O arquivo json contendo toda esta informação será utilizado pelo POA1.
 
 ###### 3.1.1.2 Predicting Antigenic Peptides/IMED
 Diferentemente do Bepipred, a ferramenta do IMED não recebe mais que uma proteína por vez. Neste caso, as sequências das proteínas deverão ser submetidas uma por vez, definindo sempre o cabeçalho. O resultado da predição é algo como: 
 
+![Captura de tela de 2022-01-26 17-56-13](https://user-images.githubusercontent.com/72517648/151360188-21f130dd-ae97-4067-b7c9-8f138bff95bf.png)
+
+
 Esta tabela deve ser copiada (ctrl+c) e colada (ctrl+v) em um arquivo de texto (.txt), seguindo o seguinte formato:
+
+![Captura de tela de 2022-01-26 17-58-37](https://user-images.githubusercontent.com/72517648/151360185-4a3b4863-5eab-4024-99d9-5105ac705e53.png)
+
+
 O arquivo .txt formatado e contendo os epítopos preditos pelo Predicting Antigenic Peptides/IMED será utilizado pelo POA1.
 
 ###### 3.1.1.3 NetCTL
 O arquivo fasta contendo todas as proteínas para a análise deve ser submetido à ferramenta NetCTL 1.2. O resultado esperado é algo como isto:
 
+![Captura de tela de 2022-01-26 18-02-17](https://user-images.githubusercontent.com/72517648/151360184-6091362a-bcb6-455f-b363-64e575096806.png)
+
+
 O resultado de saída da análise do NetCTL 1.2 é uma página web (html) contendo os peptídeos resultantes da análise e aqueles preditamente antigênicos (indicados com < - E). Esta página de resultados deverá ser salva em formato .html, O download pode ser feito com a opção “salvar como” através do click do botão direito do mouse sobre a página. ATENÇÃO: Aguardar a página carregar toda a informação para depois efetuar o Download. O arquivo .html contendo toda esta informação será utilizado pelo POA1.
 
 ###### 3.1.1.4 MHC-II Binding Predictions
 A ferramenta MHC-II Binding Predictions não avalia separadamente as proteínas quando submetidas ao servidor em um único arquivo .fasta. As proteínas deverão ser submetidas separadamente para a análise. O resultado será algo parecido com isto:
+
+![Captura de tela de 2022-01-26 18-07-50](https://user-images.githubusercontent.com/72517648/151360180-72b31616-f40f-4bce-a78c-25124cffc675.png)
+
 
 Assim como para o NetCTL, o resultado da predição do MHC-II Binding Predictions é uma página .html (escolha a opção “Text file” na seleção “Output format”) contendo os peptídeos, os scores definidos pelos algoritmos usados no servidor e algumas outras informações. Esta página html deverá ser baixada através da opção “salvar como” (click do botão direito do mouse sobre a página). O usuário deverá nomear o arquivo .html resultante da seguinte forma:
 <proteína>_<organismo>.html
