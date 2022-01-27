@@ -1,5 +1,6 @@
 # POA : Pipeline de Otimização de Antígenos (Antigen Optimization Pipeline)
 
+
 ## 1. INTRODUÇÃO
 O Pipeline de Otimização de Antígenos (POA) é um pipeline semiautomático em python para análise, organização, recuperação e triagem de epítopos resultantes da predição de peptídeos antigênicos em ferramentas web. 
 A partir dos resultados obtidos em ferramentas de predição para células B, células T-citotóxicas e células T-auxiliares, o POA identifica os melhores alvos e cria um banco de dados com estes antígenos. Além disso, o POA faz a identificação dos peptídeos com alta similaridade de resíduos entre espécies em um determinado grupo de organismos, com o auxílio da ferramenta Epitope Conservancy Analysis (http://tools.iedb.org/conservancy/), e a caracterização da localização dos epítopos em porções transmembranares, com o auxílio da ferramenta pyTMHMM (https://github.com/bosborne/pyTMHMM).
@@ -73,6 +74,8 @@ Epitopo2
 …
 
 #### 3.1.2 Argumentos obrigatórios
+  
+ ![3d](https://user-images.githubusercontent.com/72517648/151359262-9553ca42-63ad-4c9e-976f-0ac6704f49df.png)
 
 parâmetro -b: Arquivo .Json contendo o resultado da predição do Bepipred 2.0 (seção 3.1.1.1);
 parâmetro -p: Arquivo .fasta contendo os resultados da predição do PAP/IMED (seção 3.1.1.2);
@@ -99,6 +102,9 @@ Para as análises realizadas, a informação do cabeçalho será identificada a 
 Além disso, deverá ser designada obrigatoriamente uma pasta para receber os resultados da análise (parâmetro -d).
 
 #### 3.1.3 Argumentos opcionais
+ 
+  ![3d](https://user-images.githubusercontent.com/72517648/151359262-9553ca42-63ad-4c9e-976f-0ac6704f49df.png)
+  
 
 parâmetro -mhla: Tipo de alelo de HLA que estará sendo investigado na triagem do resultado da análise de ligantes do MHC-II, alelos humanos HLA-DP, HLA-DQ e HLA-DR (default = DR).
 parâmetro -mic: Threshold do IC-50 do algoritmo NN_align 2.3 usado como referência do POA1 para seleção dos epitopos. Valores de IC50 < 50 nM admitem alta afinidade de ligação do epitopo com o MHCII, IC50 < 500 nM é considerado uma ligação de afinidade intermediária e IC50 < 5000 nM caracterizam ligações de baixa afinidade (default = 50). 
@@ -112,6 +118,9 @@ parâmetro -e: Opção para que os resultados também sejam organizados em plani
 
 #### 3.1.4 Rodando o POA1
 Com os arquivos dos resultados das predições em mãos, pode-se executar o POA1.
+
+
+![2](https://user-images.githubusercontent.com/72517648/151359259-0473b328-cb54-423b-ac3c-f49cefc94213.png)
 
 #### 3.1.5 Arquivos de Saída 
 Como resultado da análise do POA1, os epítopos e as proteínas serão organizados em arquivos fasta para serem submetidos a ferramenta web Epitope Analysis Conservancy. O fastas de epítopos serão separados pela espécie do organismo, ou seja, ao final da análise todos os epítopos da espécie X serão organizados em um único fasta. O fasta contendo estes epitopos será nomeado:
@@ -130,9 +139,14 @@ Como discutido, os resultados da primeira metade do pipeline (POA1) devem ser su
 
 #### 3.2.2 Argumentos Obrigatórios
 
+ ![Design sem nome](https://user-images.githubusercontent.com/72517648/151359269-a50cbc97-443b-4dc4-9082-b1b52527a566.png)
+  
 Para utilizar o POA2 será necessário organizar todos os resultados da análise de conservação em um único diretório (parâmetro -d). Além disso, o usuário deverá informar qual o threshold de identidade de sequência (Sequence identity threshold) foi utilizado para fazer a predição (parâmetro -t) e se esta foi feita visando encontrar epítopos conservados (>=) ou epítopos únicos (<), parâmetro -g ou -l, respectivamente. Deverá ser submetido também um arquivo fasta que contenha todas as polyproteínas usadas para a predição de epítopos (parâmetro -f). Este arquivo poderá ser igual àquele submetido no POA1, seguindo a mesma formatação (ver seção 3.1.2).
 
 #### 3.2.3 Argumentos Opcionais
+
+![Design sem nome](https://user-images.githubusercontent.com/72517648/151359269-a50cbc97-443b-4dc4-9082-b1b52527a566.png)
+
 
 parâmetro -r: Diretório onde os resultados da análise do POA2 (planilhas e ou arquivos fasta) serão organizados;
 parâmetro -imin: Threshold mínimo de identidade aceito no resultado da análise de conservação entre os peptídeos e as proteínas avaliadas (default = 60).
@@ -147,6 +161,8 @@ parâmetro -rf: Opções de arquivo fasta contendo os resultados da análise de 
 #### 3.2.4 Rodando o POA2
 Com os arquivos dos resultados das predições em mãos, pode-se executar o pipeline.
 Ex: Análise de conservação para epítopos conservados (-g True)
+
+![dfd](https://user-images.githubusercontent.com/72517648/151359274-2b88b315-0f56-4494-84a8-7025be6e21df.png)
 
 #### 3.2.5 Arquivos de Saída
 Como resultado da análise do POA2, todos os epítopos selecionados na análise de conservação são organizados em um único arquivo excel (.xlsx). Além de conter as informações já disponibilizadas na planilha de resultado da ferramenta do IEDB, a tabela conta com colunas que identificam a porções do epitopo quanto a topologia da membrana, em porções externas, transmembranares e internas (representação da porcentagem, valores de 0 a 1). Esta análise de topologia da membrana é feita usando um algoritmo derivado do TMHMM (Sonnhammer et al., 1998), o pyTMHMM. 
