@@ -144,36 +144,44 @@ Epitopo2
 
  ![3d](https://user-images.githubusercontent.com/72517648/151359262-9553ca42-63ad-4c9e-976f-0ac6704f49df.png)
 
-parâmetro -b: Arquivo .Json contendo o resultado da predição do Bepipred 2.0 (seção 3.1.1.1);
-parâmetro -p: Arquivo .fasta contendo os resultados da predição do PAP/IMED (seção 3.1.1.2);
-parâmetro -m: Diretório/pasta contendo todos os arquivos .html resultados da análise do MHC-II Binding Predictions (seção 3.1.1.4);
-parâmetro -n: Arquivo .html contendo o resultado da análise do NetCTL 1.2 (seção 3.1.1.3);
-parâmetro -x: Arquivo .fasta contendo o resultado da análise de algum outro preditor escolhido pelo usuário, seguindo formatação pré-definida (ver seção 3.1.1.5);
 
-
-ATENÇÃO: Deverão ser submetidos os resultados de pelo menos um método de predição de epítopos (ver seção 3.1.1).
-
-
-Além dos resultados da predição de epitopos (argumentos n, m, b, p, e x), para utilizar o POA1 é necessário submeter ao pipeline  (parâmetro -f) um arquivo fasta contendo todas as poliproteínas (ou proteínas, caso tenham sido utilizadas em sequências separadas) usadas para a predição de epítopos. Este arquivo deve seguir a seguinte formatação:
-
-Para poliproteínas completas:
+ __parâmetro -b:__ Arquivo .Json contendo o resultado da predição do Bepipred 2.0 (seção 3.1.1.1);
  
-```
->polyprotein_<nome_do_organismo1>_<identificador1_NCBI(se houver)>...
-
-Sequencia de aminoácidos1 ...
+ __parâmetro -p:__ Arquivo .fasta contendo os resultados da predição do PAP/IMED (seção 3.1.1.2);
  
->polyprotein_<nome_do_organismo2>_<identificador2_NCBI(se houver)>...
+ __parâmetro -m:__ Diretório/pasta contendo todos os arquivos .html resultados da análise do MHC-II Binding Predictions (seção 3.1.1.4);
  
-Sequencia de aminoácidos2 ...
-...
+ __parâmetro -n:__ Arquivo .html contendo o resultado da análise do NetCTL 1.2 (seção 3.1.1.3);
+ 
+ __parâmetro -x:__ Arquivo .fasta contendo o resultado da análise de algum outro preditor escolhido pelo usuário, seguindo formatação pré-definida (ver seção 3.1.1.5);
 
-```
+ 
+ ATENÇÃO: Deverão ser submetidos os resultados de pelo menos um método de predição de epítopos (ver seção 3.1.1).
 
-Para as análises realizadas, a informação do cabeçalho será identificada a partir do símbolo separador (“_”).
+
+ Além dos resultados da predição de epitopos (__argumentos n, m, b, p, e x__), para utilizar o POA1 é necessário submeter ao pipeline  (__parâmetro -f__) um arquivo fasta contendo todas as poliproteínas (ou proteínas, caso tenham sido utilizadas em sequências separadas) usadas para a predição de epítopos. Este arquivo deve seguir a seguinte formatação:
 
 
-Além disso, deverá ser designada obrigatoriamente uma pasta para receber os resultados da análise (parâmetro -d).
+ Para poliproteínas completas:
+
+
+
+ ```
+ >polyprotein_<nome_do_organismo1>_<identificador1_NCBI(se houver)>...
+
+ Sequencia de aminoácidos1 ...
+
+ >polyprotein_<nome_do_organismo2>_<identificador2_NCBI(se houver)>...
+
+ Sequencia de aminoácidos2 ...
+ ...
+
+ ```
+
+ Para as análises realizadas, a informação do cabeçalho será identificada a partir do símbolo separador (“_”).
+
+
+ Além disso, deverá ser designada obrigatoriamente uma pasta para receber os resultados da análise (__parâmetro -d__).
 
 
 
@@ -182,15 +190,23 @@ Além disso, deverá ser designada obrigatoriamente uma pasta para receber os re
   ![3d](https://user-images.githubusercontent.com/72517648/151359262-9553ca42-63ad-4c9e-976f-0ac6704f49df.png)
 
 
-parâmetro -mhla: Tipo de alelo de HLA que estará sendo investigado na triagem do resultado da análise de ligantes do MHC-II, alelos humanos HLA-DP, HLA-DQ e HLA-DR (default = DR).
-parâmetro -mic: Threshold do IC-50 do algoritmo NN_align 2.3 usado como referência do POA1 para seleção dos epitopos. Valores de IC50 < 50 nM admitem alta afinidade de ligação do epitopo com o MHCII, IC50 < 500 nM é considerado uma ligação de afinidade intermediária e IC50 < 5000 nM caracterizam ligações de baixa afinidade (default = 50). 
-parâmetro -bmin: Valor mínimo para tamanho de epitopos preditos pela ferramenta Bepipred (default = 0, ou seja não há seleção de tamanho mínimo para os epitopos Bepipred).
-parâmetro -bmax: Valor máximo para tamanho dos epitopos preditos pela ferramenta Bepipred (default = 0, ou seja não há seleção de tamanho máximo para os epitopos Bepipred).
-parâmetro -pmin: Valor mínimo para tamanho de epitopos preditos pela ferramenta PAP/IMED (default = 0, ou seja não há seleção de tamanho mínimo para os epitopos PAP/IMED).
-parâmetro -pmax: Valor máximo para tamanho dos epitopos preditos pela ferramenta PAP/IMED  (default = 0, ou seja não há seleção de tamanho máximo para os epitopos PAP/IMED).
-parâmetro -xmin: Valor mínimo para tamanho de epitopos preditos por outros preditores que não aqueles mencionados na seção 3.1.1  (default = 0, ou seja não há seleção de tamanho para estes epítopos).
-parâmetro -xmax: Valor máximo para tamanho dos epitopos preditos por outros preditores que não aqueles mencionados na seção 3.1.1 (default = 0, ou seja não há seleção de tamanho para estes epítopos).
-parâmetro -e: Opção para que os resultados também sejam organizados em planilha Excel (.xslx), além dos arquivos fastas que são gerados obrigatoriamente (default = n).
+ __parâmetro -mhla:__ Tipo de alelo de HLA que estará sendo investigado na triagem do resultado da análise de ligantes do MHC-II, alelos humanos HLA-DP, HLA-DQ e HLA-DR (default = DR).
+ 
+ __parâmetro -mic:__ Threshold do IC-50 do algoritmo NN_align 2.3 usado como referência do POA1 para seleção dos epitopos. Valores de IC50 < 50 nM admitem alta afinidade de ligação do epitopo com o MHCII, IC50 < 500 nM é considerado uma ligação de afinidade intermediária e IC50 < 5000 nM caracterizam ligações de baixa afinidade (default = 50).
+ 
+ __parâmetro -bmin:__ Valor mínimo para tamanho de epitopos preditos pela ferramenta Bepipred (default = 0, ou seja não há seleção de tamanho mínimo para os epitopos Bepipred).
+ 
+ __parâmetro -bmax:__ Valor máximo para tamanho dos epitopos preditos pela ferramenta Bepipred (default = 0, ou seja não há seleção de tamanho máximo para os epitopos Bepipred).
+ 
+ __parâmetro -pmin:__ Valor mínimo para tamanho de epitopos preditos pela ferramenta PAP/IMED (default = 0, ou seja não há seleção de tamanho mínimo para os epitopos PAP/IMED).
+ 
+ __parâmetro -pmax:__ Valor máximo para tamanho dos epitopos preditos pela ferramenta PAP/IMED  (default = 0, ou seja não há seleção de tamanho máximo para os epitopos PAP/IMED).
+ 
+ __parâmetro -xmin:__ Valor mínimo para tamanho de epitopos preditos por outros preditores que não aqueles mencionados na seção 3.1.1  (default = 0, ou seja não há seleção de tamanho para estes epítopos).
+ 
+ __parâmetro -xmax:__ Valor máximo para tamanho dos epitopos preditos por outros preditores que não aqueles mencionados na seção 3.1.1 (default = 0, ou seja não há seleção de tamanho para estes epítopos).
+ 
+ __parâmetro -e:__ Opção para que os resultados também sejam organizados em planilha Excel (.xslx), além dos arquivos fastas que são gerados obrigatoriamente (default = n).
 
 
 
@@ -237,7 +253,7 @@ Como discutido, os resultados da primeira metade do pipeline (POA1) devem ser su
  ![Design sem nome](https://user-images.githubusercontent.com/72517648/151359269-a50cbc97-443b-4dc4-9082-b1b52527a566.png)
 
 
-Para utilizar o POA2 será necessário organizar todos os resultados da análise de conservação em um único diretório (parâmetro -d). Além disso, o usuário deverá informar qual o threshold de identidade de sequência (Sequence identity threshold) foi utilizado para fazer a predição (parâmetro -t) e se esta foi feita visando encontrar epítopos conservados (>=) ou epítopos únicos (<), parâmetro -g ou -l, respectivamente. Deverá ser submetido também um arquivo fasta que contenha todas as polyproteínas usadas para a predição de epítopos (parâmetro -f). Este arquivo poderá ser igual àquele submetido no POA1, seguindo a mesma formatação (ver seção 3.1.2).
+Para utilizar o POA2 será necessário organizar todos os resultados da análise de conservação em um único diretório (__parâmetro -d__). Além disso, o usuário deverá informar qual o threshold de identidade de sequência (Sequence identity threshold) foi utilizado para fazer a predição (__parâmetro -t__) e se esta foi feita visando encontrar epítopos conservados (>=) ou epítopos únicos (<), __parâmetro -g ou -l__, respectivamente. Deverá ser submetido também um arquivo fasta que contenha todas as polyproteínas usadas para a predição de epítopos (__parâmetro -f__). Este arquivo poderá ser igual àquele submetido no POA1, seguindo a mesma formatação (ver seção 3.1.2).
 
 
 #### 3.2.3 Argumentos Opcionais
@@ -245,15 +261,19 @@ Para utilizar o POA2 será necessário organizar todos os resultados da análise
 ![Design sem nome](https://user-images.githubusercontent.com/72517648/151359269-a50cbc97-443b-4dc4-9082-b1b52527a566.png)
 
 
-parâmetro -r: Diretório onde os resultados da análise do POA2 (planilhas e ou arquivos fasta) serão organizados;
-parâmetro -imin: Threshold mínimo de identidade aceito no resultado da análise de conservação entre os peptídeos e as proteínas avaliadas (default = 60).
-parâmetro -imax: Threshold máximo de identidade aceito no resultado da análise de conservação entre os peptídeos e as proteínas avaliadas (default = 100).
-parâmetro -m: porcentagem das sequências que tiveram match de identidade acima do threshold de identidade de sequência avaliado (parâmtero -t) (default = 60).
-parâmetro -rf: Opções de arquivo fasta contendo os resultados da análise de conservação (default = None). 
-[0] Todos os epitopos resultantes da análise de conservação, sem considerar a classificação por topologia de membrana.
-[1] Os epitopos resultantes da análise de conservação que estiverem em porções expostas da membrana.
-[2] Os epitopos resultantes da análise de conservação que estiverem em porções transmembranares.
-[3] Os epitopos resultantes da análise de conservação que estiverem em porções internas à membrana.
+ __parâmetro -r:__ Diretório onde os resultados da análise do POA2 (planilhas e ou arquivos fasta) serão organizados;
+ 
+ __parâmetro -imin:__ Threshold mínimo de identidade aceito no resultado da análise de conservação entre os peptídeos e as proteínas avaliadas (default = 60).
+ 
+ __parâmetro -imax:__ Threshold máximo de identidade aceito no resultado da análise de conservação entre os peptídeos e as proteínas avaliadas (default = 100).
+ 
+ __parâmetro -m:__ porcentagem das sequências que tiveram match de identidade acima do threshold de identidade de sequência avaliado (parâmtero -t) (default = 60).
+ 
+ __parâmetro -rf:__ Opções de arquivo fasta contendo os resultados da análise de conservação (default = None). 
+ [0] Todos os epitopos resultantes da análise de conservação, sem considerar a classificação por topologia de membrana.
+ [1] Os epitopos resultantes da análise de conservação que estiverem em porções expostas da membrana.
+ [2] Os epitopos resultantes da análise de conservação que estiverem em porções transmembranares.
+ [3] Os epitopos resultantes da análise de conservação que estiverem em porções internas à membrana.
 
 
 #### 3.2.4 Rodando o POA2
@@ -269,4 +289,4 @@ Ex: Análise de conservação para epítopos conservados (-g True)
 
 
 Como resultado da análise do POA2, todos os epítopos selecionados na análise de conservação são organizados em um único arquivo excel (.xlsx). Além de conter as informações já disponibilizadas na planilha de resultado da ferramenta do IEDB, a tabela conta com colunas que identificam a porções do epitopo quanto a topologia da membrana, em porções externas, transmembranares e internas (representação da porcentagem, valores de 0 a 1). Esta análise de topologia da membrana é feita usando um algoritmo derivado do TMHMM (Sonnhammer et al., 1998), o pyTMHMM. 
-Os epitopos triados podem também ser organizados em arquivos fasta, como demonstrado na seção 3.2.3, em parâmetro -rf.
+Os epitopos triados podem também ser organizados em arquivos fasta, como demonstrado na seção 3.2.3, em __parâmetro -rf__.
