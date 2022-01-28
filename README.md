@@ -129,13 +129,16 @@ Como a predição ocorre com uma proteína por vez, todos os arquivos .html deve
 
 Esta seção é aberta aos resultados de predição de qualquer outro preditor de peptídeos antigênicos, além dos que foram mencionados acima. Os resultados destas outras predições (não se restringe a um único método) devem ser organizados em um arquivo formato fasta. Antes de ser submetido ao POA1, o arquivo fasta contendo os epítopos preditos deverá ser organizado no seguinte formato:
 
+```
+><proteína>_<organismo>_<método_preditor>_<ID_NCBI(se_houver)>_<posição_inicial>_<posição_final>
 
-><proteína>_<organismo>_<método_preditor>_<ID_NCBI(se_houver)>_<posição_inicial>_<posição_final>
 Epitopo1
+ 
 ><proteína>_<organismo>_<método_preditor>_<ID_NCBI(se_houver)>_<posição_inicial>_<posição_final>
+ 
 Epitopo2
 …
-
+```
 
 #### 3.1.2 Argumentos obrigatórios
 
@@ -154,12 +157,18 @@ ATENÇÃO: Deverão ser submetidos os resultados de pelo menos um método de pre
 Além dos resultados da predição de epitopos (argumentos n, m, b, p, e x), para utilizar o POA1 é necessário submeter ao pipeline  (parâmetro -f) um arquivo fasta contendo todas as poliproteínas (ou proteínas, caso tenham sido utilizadas em sequências separadas) usadas para a predição de epítopos. Este arquivo deve seguir a seguinte formatação:
 
 Para poliproteínas completas:
->polyprotein_<nome_do_organismo1>_<identificador1_NCBI (se houver)>...
-Sequencia de aminoácidos ...
->polyprotein_<nome_do_organismo2>_<identificador2_NCBI (se houver)>...
-Sequencia de aminoácidos ...
+ 
+```
+>polyprotein_<nome_do_organismo1>_<identificador1_NCBI(se houver)>...
+
+Sequencia de aminoácidos1 ...
+ 
+>polyprotein_<nome_do_organismo2>_<identificador2_NCBI(se houver)>...
+ 
+Sequencia de aminoácidos2 ...
 ...
 
+```
 
 Para as análises realizadas, a informação do cabeçalho será identificada a partir do símbolo separador (“_”).
 
