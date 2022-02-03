@@ -5,7 +5,7 @@
 
 O Pipeline de Otimização de Antígenos (POA) é um pipeline semiautomático em python para análise, organização, recuperação e triagem de epítopos resultantes da predição de peptídeos antigênicos em ferramentas web. 
 
-A partir dos resultados obtidos em ferramentas de predição para células B, células T-citotóxicas e células T-auxiliares, o POA identifica os melhores alvos e cria um banco de dados com estes antígenos. Além disso, o POA faz a identificação dos peptídeos com alta similaridade de resíduos entre espécies em um determinado grupo de organismos, com o auxílio da ferramenta Epitope Conservancy Analysis (http://tools.iedb.org/conservancy/), e a caracterização da localização dos epítopos em porções transmembranares, com o auxílio da ferramenta pyTMHMM (https://github.com/bosborne/pyTMHMM).
+A partir dos resultados obtidos em ferramentas de predição para células B, células T-citotóxicas e células T-auxiliares, o POA identifica os melhores alvos e cria um banco de dados com estes antígenos. Além disso, o POA faz a identificação dos peptídeos com alta similaridade de resíduos entre espécies em um determinado grupo de organismos, com o auxílio da ferramenta [Epitope Conservancy Analysis](http://tools.iedb.org/conservancy/), e a caracterização da localização dos epítopos em porções transmembranares, com o auxílio da ferramenta [pyTMHMM](https://github.com/bosborne/pyTMHMM).
 
 
 ### 1.1 Predição de Peptídeos Antigênicos
@@ -52,7 +52,7 @@ Por se tratar de um pipeline semi-automático, algumas das etapas ainda precisar
 A primeira parte do pipeline (POA1) fará a análise dos resultados de predição e criará um banco de dados de antígenos, com base nos valores de rankeamento estabelecidos por cada ferramenta de predição. Ao final, o POA1 organiza os resultados em múltiplos arquivos fasta para serem utilizados na etapa seguinte.
 
 
-Os arquivos resultantes da primeira fase do POA (POA1) deverão ser submetidos na plataforma web da ferramenta Epitope Conservancy Analysis (http://tools.iedb.org/conservancy/). Os resultados da análise de conservação deverão ser organizados em uma pasta e esta será submetida a segunda parte do pipeline (POA2).
+Os arquivos resultantes da primeira fase do POA (POA1) deverão ser submetidos na plataforma web da ferramenta [Epitope Conservancy Analysis](http://tools.iedb.org/conservancy/). Os resultados da análise de conservação deverão ser organizados em uma pasta e esta será submetida a segunda parte do pipeline (POA2).
 
 
 O POA2 analisará os epítopos de maior ou menor conservação (a depender do objetivo da análise) e aplicará sobre estes epítopos a análise de predição de estruturas transmembranares, TMHMM. Por fim retornará os epítopos resultantes da análise de conservação e sua caracterização quanto à posição na membrana (externa, transmembranar e interna).
@@ -67,7 +67,7 @@ O POA1 recebe os resultados da predição das ferramentas web em diferentes form
 #### 3.1.1 Arquivos de entrada (Arquivos dos resultados de predição)
 
 
-Como pipeline semi-automático, a primeira coisa a se fazer é realizar a predição nas ferramentas web de predição de epítopos (ver seção 1.1). Para isto deve-se submeter via web as sequências das proteínas de interesse nestas ferramentas de predição e seguir os protocolos e parâmetros definidos para cada método e objetivo. O POA1 recebe os diferentes formatos de arquivos de saída de cada método e executa a análise, indicando e organizando os peptídeos preditamente imunogênicos.
+Como pipeline semi-automático, a primeira coisa a se fazer é realizar a predição nas ferramentas web de predição de epítopos (ver seção 1.1). Para isto deve-se submeter, via web, as sequências das proteínas de interesse nestas ferramentas de predição e seguir os protocolos e parâmetros definidos para cada método e objetivo. O POA1 recebe os diferentes formatos de arquivos de saída de cada método e executa a análise, indicando e organizando os peptídeos preditamente imunogênicos.
 
 
 ###### 3.1.1.1 Bepipred
@@ -118,7 +118,12 @@ A ferramenta MHC-II Binding Predictions não avalia separadamente as proteínas 
 
 Assim como para o NetCTL, o resultado da predição do MHC-II Binding Predictions é uma página .html (escolha a opção “Text file” na seleção “Output format”) contendo os peptídeos, os scores definidos pelos algoritmos usados no servidor e algumas outras informações. Esta página html deverá ser baixada através da opção “salvar como” (click do botão direito do mouse sobre a página). O usuário deverá nomear o arquivo .html resultante da seguinte forma:
 
-<proteína>_<organismo>.html
+> < proteína >_< organismo >.html
+ 
+ ou
+ 
+> polyp_< organismo >.html (caso esteja trabalhando com poliproteínas completas)
+
 
 ATENÇÃO: Esperar a página de resultados carregar por completo para fazer o download.
 Como a predição ocorre com uma proteína por vez, todos os arquivos .html deverão ser organizados em uma única pasta (ou diretório). O POA1 utilizará o caminho (path) desta pasta para encontrar os arquivos.
@@ -165,18 +170,32 @@ Epitopo2
  Para poliproteínas completas:
 
 
-
  ```
- >polyprotein_<nome_do_organismo1>_<identificador1_NCBI(se houver)>...
+ >polyp_<nome_do_organismo1>_<identificador1_NCBI(se houver)>...
 
  Sequencia de aminoácidos1 ...
 
- >polyprotein_<nome_do_organismo2>_<identificador2_NCBI(se houver)>...
+ >polyp_<nome_do_organismo2>_<identificador2_NCBI(se houver)>...
 
  Sequencia de aminoácidos2 ...
  ...
 
  ```
+ 
+ Para proteínas completas:
+ 
+ ```
+ ><nome_da_proteína1>_<nome_do_organismo1>_<identificador1_NCBI(se houver)>...
+
+ Sequencia de aminoácidos1 ...
+
+ ><nome_da_proteína2>_<nome_do_organismo2>_<identificador2_NCBI(se houver)>...
+
+ Sequencia de aminoácidos2 ...
+ ...
+
+ ```
+ 
 
  Para as análises realizadas, a informação do cabeçalho será identificada a partir do símbolo separador (“_”).
 
@@ -245,7 +264,7 @@ Após a análise de conservação feita pela ferramenta Epitope Conservancy Anal
 #### 3.2.1 Arquivos de entrada
 
 
-Como discutido, os resultados da primeira metade do pipeline (POA1) devem ser submetidos a análise de conservação na ferramenta online Epitope Conservancy Analysis (IEDB) (http://tools.iedb.org/conservancy/). A análise de conservação deverá ser feita para todos os fastas de epítopos (separados por espécie do organismo no POA1). Os resultados são tabelas (formato .csv) que deverão ser baixadas e armazenadas em um único diretório. O POA2 recebe e avalia cada um dos arquivos fasta presentes no diretório, seleciona os epitopos com base no valor de conservação definido pelo usuário e organiza em uma planilha os epítopos que são mais ou menos conservados (ver seção 3.2.2) e sua classificação quanto a topologia da membrana. 
+Como discutido, os resultados da primeira metade do pipeline (POA1) devem ser submetidos a análise de conservação na ferramenta online [Epitope Conservancy Analysis (IEDB)](http://tools.iedb.org/conservancy/). A análise de conservação deverá ser feita para todos os fastas de epítopos (separados por espécie do organismo no POA1). Os resultados são tabelas (formato .csv) que deverão ser baixadas e armazenadas em um único diretório. O POA2 recebe e avalia cada um dos arquivos fasta presentes no diretório, seleciona os epitopos com base no valor de conservação definido pelo usuário e organiza em uma planilha os epítopos que são mais ou menos conservados (ver seção 3.2.2) e sua classificação quanto a topologia da membrana. 
 
 
 #### 3.2.2 Argumentos Obrigatórios
@@ -288,5 +307,5 @@ Ex: Análise de conservação para epítopos conservados (-g True)
 #### 3.2.5 Arquivos de Saída
 
 
-Como resultado da análise do POA2, todos os epítopos selecionados na análise de conservação são organizados em um único arquivo excel (.xlsx). Além de conter as informações já disponibilizadas na planilha de resultado da ferramenta do IEDB, a tabela conta com colunas que identificam a porções do epitopo quanto a topologia da membrana, em porções externas, transmembranares e internas (representação da porcentagem, valores de 0 a 1). Esta análise de topologia da membrana é feita usando um algoritmo derivado do TMHMM (Sonnhammer et al., 1998), o pyTMHMM. 
+Como resultado da análise do POA2, todos os epítopos selecionados na análise de conservação são organizados em um único arquivo excel (.xlsx). Além de conter as informações já disponibilizadas na planilha de resultado da ferramenta do IEDB, a tabela conta com colunas que identificam a porções do epitopo quanto a topologia da membrana, em porções externas, transmembranares e internas (representação da porcentagem, valores de 0 a 1). Esta análise de topologia da membrana é feita usando um algoritmo derivado do TMHMM ([Sonnhammer et al., 1998](https://pubmed.ncbi.nlm.nih.gov/9783223/)), o [pyTMHMM](https://github.com/bosborne/pyTMHMM). 
 Os epitopos triados podem também ser organizados em arquivos fasta, como demonstrado na seção 3.2.3, em __parâmetro -rf__.
