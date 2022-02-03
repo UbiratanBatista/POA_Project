@@ -16,9 +16,9 @@ O screening de alto rendimento, o estudo de sequências genômicas de organismos
 Com o POA você organiza os resultados das predições in silico de epítopos de proteínas imunogênicas, obtém uma melhor visualização destes resultados (podendo ser um enorme volume de dados) e otimiza o tempo de análise destas predições. Além disso, direciona a análise fazendo a triagem de epítopos únicos (ou compartilhados) num grupo de organismos e epítopos expostos na estrutura membranar.
 
 
-Para epítopos de células B, o POA possui suporte para análise do resultado de predição da ferramenta Bepipred 2.0 (https://services.healthtech.dtu.dk/service.php?BepiPred-2.0) e Predicted Antigenic Peptides/IMED (http://imed.med.ucm.es/Tools/antigenic.pl).
-Para epítopos de células T-citotóxica, o POA possui suporte para análise do resultado de predição da ferramenta NetCTL - 1.2 (https://services.healthtech.dtu.dk/service.php?NetCTL-1.2).
-Para epítopos de células T-auxiliares, o POA possui suporte para análise do resultado de predição da ferramenta MHC-II Binding Predictions (http://tools.iedb.org/mhcii/).
+Para epítopos de células B, o POA possui suporte para análise do resultado de predição da ferramenta [Bepipred 2.0](https://services.healthtech.dtu.dk/service.php?BepiPred-2.0) e [Predicted Antigenic Peptides/IMED](http://imed.med.ucm.es/Tools/antigenic.pl).
+Para epítopos de células T-citotóxica, o POA possui suporte para análise do resultado de predição da ferramenta [NetCTL - 1.2](https://services.healthtech.dtu.dk/service.php?NetCTL-1.2).
+Para epítopos de células T-auxiliares, o POA possui suporte para análise do resultado de predição da ferramenta [MHC-II Binding Predictions](http://tools.iedb.org/mhcii/).
 Resultados de outros preditores podem também ser analisados pelo POA quando previamente organizados em arquivos fasta padronizados (ver seção 3.1.1 - Arquivos de entrada no POA1).
 
 
