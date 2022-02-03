@@ -272,7 +272,12 @@ Como discutido, os resultados da primeira metade do pipeline (POA1) devem ser su
  ![Design sem nome](https://user-images.githubusercontent.com/72517648/151359269-a50cbc97-443b-4dc4-9082-b1b52527a566.png)
 
 
-Para utilizar o POA2 será necessário organizar todos os resultados da análise de conservação em um único diretório (__parâmetro -d__). Além disso, o usuário deverá informar qual o threshold de identidade de sequência (Sequence identity threshold) foi utilizado para fazer a predição (__parâmetro -t__) e se esta foi feita visando encontrar epítopos conservados (>=) ou epítopos únicos (<), __parâmetro -g ou -l__, respectivamente. Deverá ser submetido também um arquivo fasta que contenha todas as polyproteínas usadas para a predição de epítopos (__parâmetro -f__). Este arquivo poderá ser igual àquele submetido no POA1, seguindo a mesma formatação (ver seção 3.1.2).
+Para utilizar o POA2 será necessário organizar todos os resultados da análise de conservação em um único diretório, o caminho (path) deste diretório será utilizado pelo POA2 (__parâmetro -d__). 
+
+O usuário deverá informar ao POA2 qual foi o objetivo da análise, se esta foi feita visando encontrar epítopos conservados (>=) ou epítopos únicos (<), __parâmetro -g ou -l__, respectivamente, e qual o threshold de identidade de sequência (Sequence identity threshold) foi utilizado para fazer a predição (__parâmetro -t__).
+
+Por último, deverá apresentar um arquivo fasta que contenha todas as polyproteínas/proteínas usadas para a predição de epítopos (__parâmetro -f__). Este arquivo poderá ser igual àquele submetido no POA1, seguindo a mesma formatação (ver seção 3.1.2).
+
 
 
 #### 3.2.3 Argumentos Opcionais
