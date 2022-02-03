@@ -20,13 +20,17 @@ def EpitConservAnalysis(ID_threshold, symbol, seq_match, max_ID, min_ID, directo
         Sp_ConservDF = pd.read_csv(file) #open conservancy analysis result (csv) as dataframe
         allSp_ConservDF = pd.merge(allSp_ConservDF, Sp_ConservDF, how = 'outer') #merge conservancy analysis result dataframe with general dataframe for all results 
     allSp_ConservDF['Percent of protein sequence matches at identity <= 100%'] = allSp_ConservDF['Percent of protein sequence matches at identity <= 100%'].map(lambda x: x.replace('%', ''))
-    allSp_ConservDF['Minimum identity'] = allSp_ConservDF['Minimum identity'].map(lambda x: x.lstrip('').rstrip('%'))
+    allSp_ConservDF['Minimum identity'] = allSp_ConservDF['Minimum identity'].map(lambda x: x.lstrip('').rstrip('%')) #removing the '%' character from the line 
     allSp_ConservDF['Maximum identity'] = allSp_ConservDF['Maximum identity'].map(lambda x: x.lstrip('').rstrip('%'))
-    allSp_ConservDF['Minimum identity'] = allSp_ConservDF['Minimum identity'].apply(float)
+    allSp_ConservDF['Minimum identity'] = allSp_ConservDF['Minimum identity'].apply(float) #converting line to float type
     allSp_ConservDF['Maximum identity'] = allSp_ConservDF['Maximum identity'].apply(float)
     #applying filters 
     allSp_ConservDF_idMin = allSp_ConservDF[allSp_ConservDF['Minimum identity'] >= min_ID]
+    if allSp_ConservDF_idMin.empty:#checking if the dataframe is empty 
+        return(allSp_ConservDF_idMin)
     allSp_ConservDF_idMax =  allSp_ConservDF_idMin[ allSp_ConservDF_idMin['Maximum identity'] <= max_ID]
+    if allSp_ConservDF_idMax.empty:#checking if the dataframe is empty 
+        return(allSp_ConservDF_idMax)
     seqMatchSplit = allSp_ConservDF_idMax["Percent of protein sequence matches at identity <= 100%"].str.split(" ", n = 1, expand = True)
     allSp_ConservDF_idMax["Percent"]= seqMatchSplit[0] 
     allSp_ConservDF_idMax["Reason"]= seqMatchSplit[1] 

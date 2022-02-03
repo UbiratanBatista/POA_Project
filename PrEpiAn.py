@@ -1,3 +1,4 @@
+#Verification of the viability of epitopes to be analyzed by conservancy analysis 
 def checkIntegrity(dataframe, column_epitopes, column_ID):
     indice = 0
     for line in dataframe[column_epitopes]:
@@ -74,7 +75,8 @@ def runningPrEpiAn(args):
     #Analysis of epitopes predicted by others methods
     #Parsing the fasta file
     if (args.x) != '':
-        filename = os.path.basename(rf"{args.x}")
+        filename = str(os.path.basename(rf"{args.x}"))
+        filename = filename.split('.')
         print("Analyzing data from other predictors ...\n")
         if (args.xmin) == 0 and (args.xmax) == 0:
             epitopes_df = othersPred.fasta_epitopes(args.x, 0, 0)
@@ -101,6 +103,6 @@ def runningPrEpiAn(args):
         if args.m != '':
             MHCII_df.to_excel(rf"{args.d}/MHCII-Binding_Epitopes.xlsx", sheet_name = 'Prediction Results', startcol=0, index=False)
         if args.x != '':
-            epitopes_df.to_excel(rf'{args.d}/{filename}_Epitopes.xlsx', sheet_name = 'Prediction Results', startcol=0, index=False)
+            epitopes_df.to_excel(rf'{args.d}/{filename[0]}_Epitopes.xlsx', sheet_name = 'Prediction Results', startcol=0, index=False)
 
     return(df_predictions)

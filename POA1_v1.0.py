@@ -3,10 +3,19 @@ import argparse
 import prepianResultsforConservancyAnalysis
 import os
 import PrEpiAn
+import Bio
 
+#Verification of the viability of epitopes to be analyzed by conservancy analysis 
+def checkViability(lenght_seq_dict, dataframe, column_epitopes):
+    for line in dataframe[column_epitopes]:
+        line = str(line)
+        lenght_epitope = len(line)
+        for seq in lenght_seq_dict:
+            if lenght_seq_dict[seq] < lenght_epitope:
+                raise Exception(f"ERROR: The length of all epitope sequences must be less than the length of all protein sequences. The epitope {line} is longer than at least one protein sequence")
+        
 #Checking the Sequence Integrity 
 def checkIntegrity(file):
-    import Bio
     from Bio import SeqIO
     verif = False
     for seq_record in SeqIO.parse(file, "fasta"):
@@ -26,7 +35,7 @@ def writereport(dataframe, path):
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     with open (f"{path}/Analysis_report.txt", "w") as report:
-        report.write("Analysis Report: Pipeline XXX\n\n")
+        report.write("Analysis Report: POA - Pipeline de Otimização de Antígenos (Antigen Optimization Pipeline)\n\n")
         report.write(dt_string+"\n\n")
         organisms = list(dataframe["Specie"].unique())#Number of species
         report.write(f"#Species present in the analysis:\n{len(organisms)}\n")
@@ -118,11 +127,24 @@ def main():
     if check == True:
         raise Exception(f"ERROR: The sequence {seq_X} contains an invalid character: 'x'")
 
+    #Obtaining the length of protein sequences to verify epitope viability for conservancy analysis 
+    from Bio import SeqIO
+    lenght_seq_dict = {}
+    for seq_record in SeqIO.parse(args.f, "fasta"):
+        ID_sequence = str(seq_record.id).upper()
+        sequence = str(seq_record.seq)
+        sequence = sequence.lower()
+        lenght_seq = len(sequence)
+        lenght_seq_dict[ID_sequence] = lenght_seq
+
     #organize prediction results
     results_df = PrEpiAn.runningPrEpiAn(args)
 
     #Analysis Report
     writereport(results_df, args.d)
+
+    #Checking if all epitopes are smaller than proteins in analysis
+    checkViability(lenght_seq_dict, results_df, "Peptide Sequence")
 
     #Organize data for Epitope Conservancy Analysis
     prepianResultsforConservancyAnalysis.filesforEptConsAnalysis(args.f, results_df, args.d)
