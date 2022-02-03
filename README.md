@@ -5,7 +5,7 @@
 
 O Pipeline de Otimização de Antígenos (POA) é um pipeline semiautomático em python para análise, organização, recuperação e triagem de epítopos resultantes da predição de peptídeos antigênicos em ferramentas web. 
 
-A partir dos resultados obtidos em ferramentas de predição para células B, células T-citotóxicas e células T-auxiliares, o POA identifica os melhores alvos e cria um banco de dados com estes antígenos. Além disso, o POA faz a identificação dos peptídeos com alta similaridade de resíduos entre espécies em um determinado grupo de organismos, com o auxílio da ferramenta [Epitope Conservancy Analysis](http://tools.iedb.org/conservancy/), e a caracterização da localização dos epítopos em porções transmembranares, com o auxílio da ferramenta [pyTMHMM](https://github.com/bosborne/pyTMHMM).
+A partir dos resultados obtidos em ferramentas de predição para células B, células T-citotóxicas e células T-auxiliares, o POA identifica os melhores alvos e cria um banco de dados com estes antígenos. Além disso, o POA auxilia na identificação dos peptídeos com alta similaridade de resíduos entre espécies de um determinado grupo de organismos, com o auxílio da ferramenta [Epitope Conservancy Analysis](http://tools.iedb.org/conservancy/), e na caracterização da localização dos epítopos em porções transmembranares, com o auxílio da ferramenta [pyTMHMM](https://github.com/bosborne/pyTMHMM).
 
 
 ### 1.1 Predição de Peptídeos Antigênicos
@@ -237,22 +237,15 @@ Com os arquivos dos resultados das predições em mãos, pode-se executar o POA1
 
 #### 3.1.5 Arquivos de Saída 
 
-Como resultado da análise do POA1, os epítopos e as proteínas serão organizados em arquivos fasta para serem submetidos a ferramenta web Epitope Analysis Conservancy. O fastas de epítopos serão separados pela espécie do organismo, ou seja, ao final da análise todos os epítopos da espécie X serão organizados em um único fasta. O fasta contendo estes epitopos será nomeado:
+Como resultado da análise do POA1, os epítopos serão organizados em arquivos fasta para serem submetidos a ferramenta web Epitope Analysis Conservancy. O fasta de epítopos serão separados pela espécie do organismo, ou seja, ao final da análise todos os epítopos da espécie X serão organizados em um único fasta. O fasta contendo estes epitopos será nomeado:
 
 
 X_epitope.fasta (<sp_do_organismo>_epitope.fasta)
 
-
-Na análise de conservação, quando comparados às sequencias de proteínas da espécie em que foram retirados, estes epítopos darão match de 100% com as proteínas em questão. Desta forma, para evitar redundâncias na comparação entre epitopos-proteínas, o POA1 também cria um fasta contendo todas as proteínas presentes na análise, exceto aquelas do organismo em que os próprios epitopos foram retirados. Este arquivo será nomeado:
-
-
-X_protein.fasta (<sp_do_organismo_não_incluso_na_análise>_epitope.fasta)
+Na análise de conservação, estes epítopos deverão ser comparados às sequências de proteínas de outras espécies diferentes da qual eles foram retirados. Desta forma, para evitar redundâncias na comparação entre epitopos-proteínas, sugere-se criar um fasta contendo todas as proteínas presentes na análise, exceto aquelas do organismo em que os próprios epítopos foram retirados. Sugere-se ainda utilizar poliproteínas completas para fazer a comparação dos epitopos.
 
 
-O arquivo em questão não possui as proteínas do organismo X. Este arquivo deverá ser submetido a análise de conservação junto (e somente) com o arquivo que o acompanha, o arquivo de epitopos X_epitope.fasta.
-
-
-O POA1 constrói ainda um relatório de análises contendo algumas estatísticas dos epitopos analisados. Contêm algumas informações como número de proteínas, número de epitopos e quantidade maior e menor de epitopos dentre as proteínas. Além disso, o pipeline permite a exportação dos epitopos em formato .xslx (Excel) (ver seção 3.1.3 - argumentos opcionais).
+O POA1 constrói ainda um relatório de análises contendo algumas estatísticas dos epitopos analisados. Este relatório contém algumas informações como número de proteínas, número de epítopos e quantidade maior e menor de epitopos dentre as proteínas. Além disso, o pipeline permite a exportação dos epitopos em formato .xslx (Excel) (ver seção 3.1.3 - argumentos opcionais).
 
 
 ### 3.2 POA2
