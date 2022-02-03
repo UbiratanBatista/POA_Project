@@ -108,7 +108,7 @@ def MHCIIAntigenEpitopes(df, specie, protein, allele_class, ic50):
         cut_NNSB = cut_NNSB.reset_index(drop = True)
     #Building the Final DataFrame with the data of interest
     df = cut_NNSB[['specie', 'protein', 'allele', 'start', 'end', 'peptide']]
-    df = df.assign(method = 'MHC-II_Binding')#Add Method Column
+    df = df.assign(method = 'MHCII-Binding')#Add Method Column
     df = df.assign(ID_Sequence = '-')#Add ID_Sequence Column
     df = df[['method', 'specie', 'protein', 'allele', 'ID_Sequence', 'start', 'end', 'peptide']]
     #standardizing column names with dataframes for other methods 

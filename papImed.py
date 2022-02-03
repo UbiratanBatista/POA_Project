@@ -36,7 +36,10 @@ def PAPepitopes(file, lenght_min, lenght_max):
         sp = imed_id[1]
         protein = imed_id[0]
         if len(imed_id) > 2:
-            idSeq = imed_id[2]
+            if imed_id[2] == "NP":
+                idSeq = imed_id[2] + "_" + imed_id[3]
+            else:
+                idSeq = imed_id[2]
         else:
             idSeq = '-'
         #Building the final dataframe with the results

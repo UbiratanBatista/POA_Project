@@ -73,8 +73,9 @@ def bpAntigenEpitopes(dataframe, lenght_min, lenght_max):
         dataID = line.split('_')
         prot.append(dataID[0]) 
         sp.append(dataID[1])
-        if len(dataID) > 4:
-            idSeqNumber.append(dataID[2] + "_" + dataID[3])
+        if len(dataID) >= 4:
+            if dataID[2] == "NP":
+                idSeqNumber.append(dataID[2] + "_" + dataID[3])
         else:
             idSeqNumber.append(dataID[2])
     #Add new columns in the Dataframe

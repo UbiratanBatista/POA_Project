@@ -25,8 +25,9 @@ def main():
     import argparse
     import conservancyAnalysis
     import PepiTMHMM
+    import sys
 
-    parser = argparse.ArgumentParser(add_help=False, description = 'POA2 - Analysis Conservancy and TMHMM')
+    parser = argparse.ArgumentParser(add_help=False, description = 'POA2 - Conservancy Analysis and TMHMM')
     parser._action_groups.pop()
     required = parser.add_argument_group('required arguments')
     optional = parser.add_argument_group('optional arguments')
@@ -34,7 +35,7 @@ def main():
     mutually_exclusive_group.add_argument("-g", help= "-g: greater than or equal to (>=) in Sequence identity threshold from your analysis", type=str)
     mutually_exclusive_group.add_argument("-l", help= "-l: less-than sign (<) in Sequence identity threshold from your analysis", type=str)
     required.add_argument("-h", "--help", action ="help", default=argparse.SUPPRESS, help= "Print this help message.")
-    required.add_argument("-d", help= "Directory for Results of the Epitope Conservancy analysis in CSV format", type=str, default='', required = "True")
+    required.add_argument("-d", help= "Directory for Results of the Epitope Conservancy Analysis in CSV format", type=str, default='', required = "True")
     required.add_argument("-t", help= "Sequence identity threshold", type=int, default='', required = "True")
     optional.add_argument("-r", help= "Directory for analysis results", type=str, default='')
     optional.add_argument("-imin", help= "Minimum identity (%%) in Conservancy Analysis", type=int, default='60')
@@ -45,16 +46,18 @@ def main():
                                     [1]epitopes in Outside portion(TMHMM)
                                     [2]epitopes in Transmembrane portion(TMHMM)
                                     [3]epitopes in Inside portion(TMHMM)''', type=int, default=None)
- 
-
+    if len(sys.argv)==1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
     args = parser.parse_args()
     
-    print('POA2 - Analysis Conservancy' + "\n")
+    print("\n" + 'POA2 - Analysis Conservancy' + "\n")
     if (args.t == '') or (args.d == ''):
         raise Exception(f'ERROR: The following arguments are required: -t, -d')
     
-    if (args.rf < 0) or (args.rf > 3):
-        raise Exception(f'ERROR: Argument -rf is invalid')
+    if args.rf != None:
+        if (args.rf < 0) or (args.rf > 3):
+            raise Exception(f'ERROR: Argument -rf is invalid')
 
     if args.r != '':
         path = f"{args.r}/POA2_analysis"
@@ -65,7 +68,7 @@ def main():
         type_symbol = '>='
     else:
         type_symbol = '<'
-    
+
     #organize the results of conservancy analysis 
     ConservancyAnalysis_DF = conservancyAnalysis.EpitConservAnalysis(args.t, type_symbol, args.m, args.imax, args.imin, args.d)   
     #applying the TMHMM prediction on the epitopes
