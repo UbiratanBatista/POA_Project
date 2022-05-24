@@ -4,9 +4,10 @@ def MHCIIHTMLconverter(file):
     import html
     with open (file, 'r') as Rawdata:
         lines_list = Rawdata.readlines()
+        lines_tuple = tuple(lines_list)
         df = pd.DataFrame()
         x = 0
-        for line in lines_list:
+        for line in lines_tuple:
             line = html.unescape(line) #Converting html named and numeric character references (e.g. &lt) in Unicode characters
             line = line.replace('\n', '')
             if line[:6] == 'allele':

@@ -22,4 +22,4 @@ def epitTMHMMcaract (seq_TMHMM, initial_pos, lenght):
     Outporct = out_count/lenght
     TMporct = tm_count/lenght
     Insporct = ins_count/lenght
-    return (f"{Outporct:.4f}", f"{TMporct:.4f}", f"{Insporct:.4f}")
+    return (round(Outporct, 4), round(TMporct, 4), round(Insporct, 4))
