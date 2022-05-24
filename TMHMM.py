@@ -14,7 +14,7 @@ def pyTMHMMpredict(file):
         prediction_TMHMM_list.append(annotation)
     return(id_seqs_list, prediction_TMHMM_list)
 
-def epitTMHMMcaract (seq_TMHMM, initial_pos, lenght):
+def epitTMHMMcaract (seq_TMHMM, initial_pos, lenght): #Contabilizando as posições dos aminoácidos
     epitope_TMHMM = seq_TMHMM[initial_pos:(initial_pos+lenght)]
     out_count = epitope_TMHMM.count('o')
     tm_count = epitope_TMHMM.count('m')
@@ -22,4 +22,4 @@ def epitTMHMMcaract (seq_TMHMM, initial_pos, lenght):
     Outporct = out_count/lenght
     TMporct = tm_count/lenght
     Insporct = ins_count/lenght
-    return (f"{Outporct:.4f}", f"{TMporct:.4f}", f"{Insporct:.4f}")
+    return (round(Outporct, 4), round(TMporct, 4), round(Insporct, 4))

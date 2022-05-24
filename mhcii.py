@@ -4,9 +4,10 @@ def MHCIIHTMLconverter(file):
     import html
     with open (file, 'r') as Rawdata:
         lines_list = Rawdata.readlines()
+        lines_tuple = tuple(lines_list)
         df = pd.DataFrame()
         x = 0
-        for line in lines_list:
+        for line in lines_tuple:
             line = html.unescape(line) #Converting html named and numeric character references (e.g. &lt) in Unicode characters
             line = line.replace('\n', '')
             if line[:6] == 'allele':
@@ -67,7 +68,7 @@ def MHCIIAntigenEpitopes(df, specie, protein, allele_class, ic50):
     NN_df = NN_df.assign(protein = prot)#Add Proteins Column
     NN_df_remove = NN_df.loc[(NN_df['nn_align_ic50'] == '-')]
     new_NN_df = NN_df.drop(NN_df_remove.index)
-    #Prediction Label for strong and weak bindings
+    #Prediction label for strong and weak bindings
     predNN = []
     for line in new_NN_df['nn_align_ic50']:
         line = float(line)

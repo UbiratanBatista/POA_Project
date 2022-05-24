@@ -1,6 +1,7 @@
-#Get Epitopes predictes from NetCTL-1.2 Server
+#Get epitopes predictes from NetCTL-1.2 Server
 def netctlAntigenEpitopes(file):
     import pandas as pd
+    import html
     NetCTL_df = pd.DataFrame()
     #Create a DataFrame with columns of the same name as those in the NetCTL result table
     columns = 'Residue_number ID Protein_identifier pep Peptide_sequence aff Predicted_MHC_binding_affinity aff_rescale Rescale_binding_affinity cle C_terminal_cleavage_affinity tap TAP_transport_efficiency COMB Prediction_score Identified_MHC_ligands'
@@ -11,6 +12,7 @@ def netctlAntigenEpitopes(file):
     x = 0
     #Filling in the DataFrame with netctl results (html)
     for line in text:
+        line = html.unescape(line) #Converting html named and numeric character references (e.g. &lt) in Unicode characters
         if not line.isspace():
             line = line.strip()
             if (line[0]) in '0123456789':

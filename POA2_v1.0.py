@@ -16,7 +16,7 @@ def getfastafile(path,portion_epitopes, dataframe):
                 else: #inner regions
                     column = "Portion_Inside"
                 if column != '':
-                    if dataframe.iloc[indice_line][column] == 1:
+                    if dataframe.iloc[indice_line][column] == 1: #To check if the cell contains a specific text
                         results_fasta.write(f'>{idt_epitope}')
                         results_fasta.write(f'\n{epitope}\n')
                  
